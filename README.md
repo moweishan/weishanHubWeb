@@ -1,122 +1,142 @@
-<p align="center">
-	<img alt="logo" src="https://oscimg.oschina.net/oscnet/up-d3d0a9303e11d522a06cd263f3079027715.png">
-</p>
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">RuoYi v3.9.2</h1>
-<h4 align="center">基于SpringBoot+Vue3前后端分离的Java快速开发框架</h4>
-<p align="center">
-	<a href="https://gitee.com/y_project/RuoYi-Vue/stargazers"><img src="https://gitee.com/y_project/RuoYi-Vue/badge/star.svg?theme=dark"></a>
-	<a href="https://gitee.com/y_project/RuoYi-Vue"><img src="https://img.shields.io/badge/RuoYi-v3.9.2-brightgreen.svg"></a>
-	<a href="https://gitee.com/y_project/RuoYi-Vue/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
-</p>
+若依原项目：[RuoYi-Vue3](https://github.com/yangzongzhuan/RuoYi-Vue3)
 
-## 平台简介
+# weishanHub Web
 
-* 本仓库为前端技术栈 [Vue3](https://v3.cn.vuejs.org) + [Element Plus](https://element-plus.org/zh-CN) + [Vite](https://cn.vitejs.dev) 版本。
-* 配套后端代码仓库地址[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue) 或 [RuoYi-Vue-fast](https://gitcode.com/yangzongzhuan/RuoYi-Vue-fast) 版本。
-* 阿里云折扣场：[点我进入](http://aly.ruoyi.vip)，腾讯云秒杀场：[点我进入](http://txy.ruoyi.vip)&nbsp;&nbsp;
+weishanHub 的 Vue3 管理前端，保留若依登录、动态菜单、角色/按钮权限、字典、基础管理页面、监控和代码生成页面。当前为基础框架阶段，不包含额外业务模块。
 
-# 版本对比
+本仓库可以独立克隆、安装、启动和构建。真实登录和管理功能需要可访问的 [weishanHubServer](https://github.com/moweishan/weishanHubServer)，也可连接团队提供的兼容后端；无需将后端放在本仓库内部。本文所有命令和相对路径均从本仓库根目录执行，不依赖外层工作区。
 
-RuoYi-Vue 前端项目的三个主要演进版本，方便你直观对比其技术栈差异（并行开发维护）。
+## 技术与环境
 
-| 项目名称      | **RuoYi-Vue2** | **RuoYi-Vue3** | **RuoYi-Vue3-TypeScript**   |
-| :---          | :---           | :---           | :---                        |
-| **前端框架**  | Vue 2         | Vue 3          | Vue 3                       |
-| **脚本语言**  | JavaScript    | JavaScript     | TypeScript                  |
-| **构建工具**  | Vue CLI       | Vite           | Vite                        |
-| **UI 组件库** | Element UI    | Element Plus   | Element Plus                |
-| **状态管理**  | Vuex          | Pinia          | Pinia                       |
-| **路由管理**  | Vue Router 3  | Vue Router 4   | Vue Router 4                |
-| **核心特点**  | 1. 技术栈经典稳定<br>2. 社区资料丰富<br>3. 当前维护重心已转移 | 1. 现代前端技术栈<br>2. 开发体验与性能更优<br>3. 官方主推的活跃版本 | 1. 类型加持，减少沟通成本<br>2. 开发时有提示，效率更高<br>3. 多人协作企业级开发项目 |
-| **仓库地址**  | [RuoYi-Vue2](https://gitcode.com/yangzongzhuan/RuoYi-Vue2) | [RuoYi-Vue3](https://gitcode.com/yangzongzhuan/RuoYi-Vue3) | [RuoYi-Vue3-TypeScript](https://gitcode.com/yangzongzhuan/RuoYi-Vue3/tree/typescript) |
+| 项目 | 实际配置 |
+| --- | --- |
+| RuoYi-Vue3 | 3.9.2 |
+| Vue / Vite | 3.5.26 / 6.4.1 |
+| Element Plus / Pinia | 2.13.1 / 3.0.4 |
+| Vue Router / Axios | 4.6.4 / 1.13.2 |
+| Node / npm | package.json 要求 Node >=20.19.0、npm >=10；已验证 Node 24.20.0 / npm 11.19.0 |
 
-## 前端运行
+优先使用已验证的 Node 24.20.0；Vite 6 的 engines 为 ^18、^20 或 >=22，不要因本项目宽泛的最低版本声明而选择 Node 21。版本以 [package.json](package.json) 和 [package-lock.json](package-lock.json) 为准，未擅自升级上游核心依赖。上游导入提交为 `838965c5a18d2c61b73ec30c6e288057aaa08b63`。
 
-```bash
-# 克隆项目
-git clone https://github.com/yangzongzhuan/RuoYi-Vue3.git
+前端本身不直接连接 MySQL 或 Redis；后端运行环境、数据库初始化和凭据配置见配套后端 README。不要把数据库账号、Redis 密码或 JWT 密钥放进前端。
 
-# 进入项目目录
-cd RuoYi-Vue3
+## 克隆与安装
 
-# 安装依赖
-yarn --registry=https://registry.npmmirror.com
-
-# 启动服务
-yarn dev
-
-# 构建测试环境 yarn build:stage
-# 构建生产环境 yarn build:prod
-# 前端访问地址 http://localhost:80
+```powershell
+git clone https://github.com/moweishan/weishanHubWeb.git
+cd weishanHubWeb
+node --version
+npm --version
+npm install --no-audit --no-fund
 ```
 
-## 内置功能
+提交并保留 package-lock.json，使依赖版本可追溯；依赖调整需说明原因，不为消除弃用提示擅自升级核心框架。全新克隆不含 node_modules 或 dist，需要自行安装和构建。
 
-1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。
-2.  部门管理：配置系统组织机构（公司、部门、小组），树结构展现支持数据权限。
-3.  岗位管理：配置系统用户所属担任职务。
-4.  菜单管理：配置系统菜单，操作权限，按钮权限标识等。
-5.  角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分。
-6.  字典管理：对系统中经常使用的一些较为固定的数据进行维护。
-7.  参数管理：对系统动态配置常用参数。
-8.  通知公告：系统通知公告信息发布维护。
-9.  操作日志：系统正常操作日志记录和查询；系统异常信息日志记录和查询。
-10. 登录日志：系统登录日志记录查询包含登录异常。
-11. 在线用户：当前系统中活跃用户状态监控。
-12. 定时任务：在线（添加、修改、删除)任务调度包含执行结果日志。
-13. 代码生成：前后端代码的生成（java、html、xml、sql）支持CRUD下载 。
-14. 系统接口：根据业务代码自动生成相关的api接口文档。
-15. 服务监控：监视当前系统CPU、内存、磁盘、堆栈等相关信息。
-16. 缓存监控：对系统的缓存信息查询，命令统计等。
-17. 在线构建器：拖动表单元素生成相应的HTML代码。
-18. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
+```text
+.
+├── src/
+│   ├── api/                     # 模块接口，统一调用 request
+│   ├── views/                   # 业务及基础管理页面
+│   ├── router/                  # 常量及动态路由
+│   ├── store/modules/           # Pinia 用户、权限、布局状态
+│   ├── layout/                  # 管理后台布局
+│   ├── components/              # 公共组件
+│   ├── directive/               # 权限等指令
+│   ├── utils/request.js         # Token、响应、异常和下载处理
+│   └── settings.js
+├── public/
+├── vite/                        # Vite 插件配置
+├── deploy/nginx.conf.example
+├── .env.development / .env.production / .env.staging
+├── .env.local.example
+├── package.json / package-lock.json
+├── vite.config.js
+├── LICENSE
+├── README.md
+└── AGENTS.md
+```
 
-## 在线体验
+## API 与本地配置
 
-- admin/admin123  
-- 陆陆续续收到一些打赏，为了更好的体验已用于演示服务器升级。谢谢各位小伙伴。
+默认开发环境访问链路：浏览器 `/dev-api/*` → Vite 代理 → `http://localhost:8080/*`，代理会去除 `/dev-api` 前缀。先启动兼容后端，确认 `http://localhost:8080/` 可访问。
 
-演示地址：http://vue.ruoyi.vip  
-文档地址：http://doc.ruoyi.vip
+需要覆盖本机代理时，首次复制示例（已有文件时先检查，避免覆盖）：
 
-## 演示图
+```powershell
+Copy-Item .env.local.example .env.development.local
+```
 
-<table>
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/cd1f90be5f2684f4560c9519c0f2a232ee8.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/1cbcf0e6f257c7d3a063c0e3f2ff989e4b3.jpg"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-8074972883b5ba0622e13246738ebba237a.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-9f88719cdfca9af2e58b352a20e23d43b12.png"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-39bf2584ec3a529b0d5a3b70d15c9b37646.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-936ec82d1f4872e1bc980927654b6007307.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-b2d62ceb95d2dd9b3fbe157bb70d26001e9.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-d67451d308b7a79ad6819723396f7c3d77a.png"/></td>
-    </tr>	 
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/5e8c387724954459291aafd5eb52b456f53.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/644e78da53c2e92a95dfda4f76e6d117c4b.jpg"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-8370a0d02977eebf6dbf854c8450293c937.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-49003ed83f60f633e7153609a53a2b644f7.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-d4fe726319ece268d4746602c39cffc0621.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-c195234bbcd30be6927f037a6755e6ab69c.png"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/b6115bc8c31de52951982e509930b20684a.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-5e4daac0bb59612c5038448acbcef235e3a.png"/></td>
-    </tr>
-</table>
+Linux/macOS 可使用 `cp -n .env.local.example .env.development.local`。示例默认内容为：
 
+```dotenv
+API_TARGET=http://localhost:8080
+VITE_APP_BASE_API=/dev-api
+```
 
-## 若依前后端分离交流群
+将 API_TARGET 改为可达的后端地址；不要附加 `/dev-api`，除非目标服务器本身要求该路径。修改环境文件后重启开发服务。
 
-QQ群： [![加入QQ群](https://img.shields.io/badge/已满-937441-blue.svg)](https://jq.qq.com/?_wv=1027&k=5bVB1og) [![加入QQ群](https://img.shields.io/badge/已满-887144332-blue.svg)](https://jq.qq.com/?_wv=1027&k=5eiA4DH) [![加入QQ群](https://img.shields.io/badge/已满-180251782-blue.svg)](https://jq.qq.com/?_wv=1027&k=5AxMKlC) [![加入QQ群](https://img.shields.io/badge/已满-104180207-blue.svg)](https://jq.qq.com/?_wv=1027&k=51G72yr) [![加入QQ群](https://img.shields.io/badge/已满-186866453-blue.svg)](https://jq.qq.com/?_wv=1027&k=VvjN2nvu) [![加入QQ群](https://img.shields.io/badge/已满-201396349-blue.svg)](https://jq.qq.com/?_wv=1027&k=5vYAqA05) [![加入QQ群](https://img.shields.io/badge/已满-101456076-blue.svg)](https://jq.qq.com/?_wv=1027&k=kOIINEb5) [![加入QQ群](https://img.shields.io/badge/已满-101539465-blue.svg)](https://jq.qq.com/?_wv=1027&k=UKtX5jhs) [![加入QQ群](https://img.shields.io/badge/已满-264312783-blue.svg)](https://jq.qq.com/?_wv=1027&k=EI9an8lJ) [![加入QQ群](https://img.shields.io/badge/已满-167385320-blue.svg)](https://jq.qq.com/?_wv=1027&k=SWCtLnMz) [![加入QQ群](https://img.shields.io/badge/已满-104748341-blue.svg)](https://jq.qq.com/?_wv=1027&k=96Dkdq0k) [![加入QQ群](https://img.shields.io/badge/已满-160110482-blue.svg)](https://jq.qq.com/?_wv=1027&k=0fsNiYZt) [![加入QQ群](https://img.shields.io/badge/已满-170801498-blue.svg)](https://jq.qq.com/?_wv=1027&k=7xw4xUG1) [![加入QQ群](https://img.shields.io/badge/已满-108482800-blue.svg)](https://jq.qq.com/?_wv=1027&k=eCx8eyoJ) [![加入QQ群](https://img.shields.io/badge/已满-101046199-blue.svg)](https://jq.qq.com/?_wv=1027&k=SpyH2875) [![加入QQ群](https://img.shields.io/badge/已满-136919097-blue.svg)](https://jq.qq.com/?_wv=1027&k=tKEt51dz) [![加入QQ群](https://img.shields.io/badge/已满-143961921-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=0vBbSb0ztbBgVtn3kJS-Q4HUNYwip89G&authKey=8irq5PhutrZmWIvsUsklBxhj57l%2F1nOZqjzigkXZVoZE451GG4JHPOqW7AW6cf0T&noverify=0&group_code=143961921) [![加入QQ群](https://img.shields.io/badge/已满-174951577-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=ZFAPAbp09S2ltvwrJzp7wGlbopsc0rwi&authKey=HB2cxpxP2yspk%2Bo3WKTBfktRCccVkU26cgi5B16u0KcAYrVu7sBaE7XSEqmMdFQp&noverify=0&group_code=174951577) [![加入QQ群](https://img.shields.io/badge/已满-161281055-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=Fn2aF5IHpwsy8j6VlalNJK6qbwFLFHat&authKey=uyIT%2B97x2AXj3odyXpsSpVaPMC%2Bidw0LxG5MAtEqlrcBcWJUA%2FeS43rsF1Tg7IRJ&noverify=0&group_code=161281055) [![加入QQ群](https://img.shields.io/badge/已满-138988063-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=XIzkm_mV2xTsUtFxo63bmicYoDBA6Ifm&authKey=dDW%2F4qsmw3x9govoZY9w%2FoWAoC4wbHqGal%2BbqLzoS6VBarU8EBptIgPKN%2FviyC8j&noverify=0&group_code=138988063) [![加入QQ群](https://img.shields.io/badge/已满-151450850-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=DkugnCg68PevlycJSKSwjhFqfIgrWWwR&authKey=pR1Pa5lPIeGF%2FFtIk6d%2FGB5qFi0EdvyErtpQXULzo03zbhopBHLWcuqdpwY241R%2F&noverify=0&group_code=151450850) [![加入QQ群](https://img.shields.io/badge/已满-224622315-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=F58bgRa-Dp-rsQJThiJqIYv8t4-lWfXh&authKey=UmUs4CVG5OPA1whvsa4uSespOvyd8%2FAr9olEGaWAfdLmfKQk%2FVBp2YU3u2xXXt76&noverify=0&group_code=224622315) [![加入QQ群](https://img.shields.io/badge/已满-287842588-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=Nxb2EQ5qozWa218Wbs7zgBnjLSNk_tVT&authKey=obBKXj6SBKgrFTJZx0AqQnIYbNOvBB2kmgwWvGhzxR67RoRr84%2Bus5OadzMcdJl5&noverify=0&group_code=287842588) [![加入QQ群](https://img.shields.io/badge/已满-187944233-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=numtK1M_I4eVd2Gvg8qtbuL8JgX42qNh&authKey=giV9XWMaFZTY%2FqPlmWbkB9g3fi0Ev5CwEtT9Tgei0oUlFFCQLDp4ozWRiVIzubIm&noverify=0&group_code=187944233) [![加入QQ群](https://img.shields.io/badge/已满-228578329-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G6r5KGCaa3pqdbUSXNIgYloyb8e0_L0D&authKey=4w8tF1eGW7%2FedWn%2FHAypQksdrML%2BDHolQSx7094Agm7Luakj9EbfPnSTxSi2T1LQ&noverify=0&group_code=228578329) [![加入QQ群](https://img.shields.io/badge/已满-191164766-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=GsOo-OLz53J8y_9TPoO6XXSGNRTgbFxA&authKey=R7Uy%2Feq%2BZsoKNqHvRKhiXpypW7DAogoWapOawUGHokJSBIBIre2%2FoiAZeZBSLuBc&noverify=0&group_code=191164766) [![加入QQ群](https://img.shields.io/badge/已满-174569686-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=PmYavuzsOthVqfdAPbo4uAeIbu7Ttjgc&authKey=p52l8%2FXa4PS1JcEmS3VccKSwOPJUZ1ZfQ69MEKzbrooNUljRtlKjvsXf04bxNp3G&noverify=0&group_code=174569686) [![加入QQ群](https://img.shields.io/badge/已满-127358632-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=M9y5NjAl44lAL_Vh2crmEehZU_PMU6KS&authKey=ZSDz8hEREWSaPuxQV3gEwqGIaGjfRNnkB4rJjf0IvXhrSUGSGwQFmBA%2Boe8HFxyl&noverify=0&group_code=127358632) [![加入QQ群](https://img.shields.io/badge/113071109-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=UGnoqRcFRxUaX-JAUNrSDbPimKrllp4x&authKey=Bbzf8Bc0XaQhq5c4QOg46Uqngd%2FvtIixrLvCM1EkPf41diqKXKZqXVwAxHTxJ8R1&noverify=0&group_code=113071109) 点击按钮入群。
+| 配置 | 开发 | 生产 | 预发布 |
+| --- | --- | --- | --- |
+| 文件 | .env.development | .env.production | .env.staging |
+| VITE_APP_TITLE | weishanHub | weishanHub | weishanHub |
+| VITE_APP_BASE_API | /dev-api | /prod-api | /stage-api |
+| API_TARGET | 默认 http://localhost:8080，仅控制开发代理 | 不控制生产静态站点代理 | 生产部署需另外配置代理 |
+
+`API_TARGET` 只由 Vite 配置读取；`VITE_` 变量会进入浏览器代码，都是公开配置。禁止存放密码、密钥或私密令牌。`.env.development.local` 等本地文件不提交；`.env.local.example` 和三个公开环境文件保留提交。
+
+## 启动与构建
+
+```powershell
+npm run dev
+```
+
+默认地址 `http://localhost/`，端口 `80`，`strictPort=true`。端口占用时明确失败，不会自动换端口。部分系统绑定 80 需要额外权限；先检查占用和权限，如确需换端口，在 `vite.config.js` 明确修改并记录，不要无故调整默认端口。页面可以在后端未启动时编译，但验证码、登录和管理功能需要后端连通。
+
+```powershell
+npm run build:prod
+npm run build:stage
+```
+
+两种构建均输出到 `dist/`，后一次会替换相同输出目录。`build:prod` 使用 `/prod-api`；`build:stage` 使用 `/stage-api`。初始化阶段已验证 install、dev 和 build:prod；build:stage 命令来自实际 package.json，尚未单独进行预发布环境验收。
+
+`npm run preview` 用于预览构建文件，不替代生产 Nginx 或后端部署；若需要真实 API，仍须让当前构建的 API 前缀可访问。
+
+## 生产部署
+
+1. 执行 `npm run build:prod`，将 dist 内容部署到 Nginx 静态目录。
+2. 参考 [Nginx 示例](deploy/nginx.conf.example)，默认静态根目录为 `/var/www/weishanhub`，按服务器实际路径修改。
+3. `/prod-api/` 使用带尾斜杠的 `proxy_pass http://127.0.0.1:8080/;` 去除前缀；后端不需要把 Controller 路径改为 `/prod-api` 开头。
+4. 保留 SPA `try_files` 回退到 index.html，避免刷新动态路由出现 404。上传大小、超时、Host 和转发头按示例及实际部署调整。
+5. 生产入口配置 HTTPS；预发布构建需对应配置 `/stage-api/`。Vite 开发代理不会进入 dist，不能靠 API_TARGET 配置生产反向代理。
+
+真实生产 Nginx、HTTPS 和预发布环境尚未在初始化阶段部署验收。后端 Swagger 请求前缀生产设置 API_PREFIX=/prod-api；接口页保留 `/swagger-ui/index.html`。
+
+## 接口与权限约定
+
+登录 `POST /login` 使用 username/password/code/uuid，成功返回 token；`src/utils/request.js` 附加 Bearer Token。`/getInfo` 返回 user/roles/permissions，`/getRouters` 返回 data 动态路由，`/logout` 删除会话。分页请求 pageNum/pageSize，响应 code/msg/rows/total；普通响应 code/msg/data。
+
+动态组件由 `src/store/modules/permission.js` 映射 `src/views`。按钮使用现有 v-hasPermi/v-hasRole；后端 Security 和方法权限才是授权边界。文件沿用上传组件、fileName + API 前缀、统一下载封装，禁止把接口域名硬编码在页面中。
+
+## 开发规范
+
+- 页面放在 `src/views/<模块>`，接口集中在 `src/api/<模块>`；公共组件、状态和样式沿用现有组织方式。
+- 优先复用 Element Plus、字典、表格分页、表单校验、权限指令、下载和上传组件，保持后台布局。
+- 新增菜单同步确认后端 component 路径、路由 name/path 和 `模块:资源:动作` 权限标识；新增接口检查后端适配。
+- 中文沟通、文档及新增注释；遵循邻近文件命名风格；不自行增加业务模块，不擅自替换 Vue、Vite、Pinia 或重构权限架构。
+- 修改依赖同步锁文件；本地环境配置、密钥、依赖、日志和 dist 不提交。保留 LICENSE 与原作者信息。
+- AI 开发前阅读 [AGENTS.md](AGENTS.md)，完成后报告实际验证与未验证范围。
+
+## 验证与常见问题
+
+独立克隆后的基础验收：依赖安装成功、build:prod 成功、dev 页面显示 weishanHub；连接兼容后端后，检查验证码、登录、用户信息、动态菜单、按钮权限、字典、分页、文件传输与退出。初始化阶段上述核心 HTTP 链路已验证，但未逐页验收所有管理页面或完整角色权限矩阵；本次文档调整不等于重新执行全部测试。
+
+- 代理连接拒绝：检查 API_TARGET、后端 8080 和防火墙，再重启 Vite。
+- 401：检查 Token 与后端 Redis 会话，禁止通过移除权限代码解决。
+- 生产 API 404：检查构建模式、/prod-api 前缀和 Nginx 去前缀规则。
+- 直接刷新页面 404：检查 Nginx 的 SPA 回退。
+- npm 弃用或本机全局 python 配置提示：先区分提示和构建失败，不为消除提示随意升级框架。
+- 本仓库没有 test/lint 脚本；不要编造已运行的命令或把构建成功当作完整功能验收。
+
+## 来源与许可证
+
+Copyright (c) 2018 RuoYi，遵循 [MIT License](LICENSE)，保留原项目地址、许可证和源码作者信息。后端官方来源为 [RuoYi-Vue-fast](https://github.com/yangzongzhuan/RuoYi-Vue-fast)。weishanHub 为系统显示名称，原框架名称可保留于版权、内部工具和上游历史中。
