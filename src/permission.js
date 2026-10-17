@@ -20,12 +20,16 @@ const isWhiteList = (path) => {
 
 router.beforeEach(async (to, from) => {
   NProgress.start()
+  // 公开门面：无论是否持有 token 都直接放行，不拉取用户信息与动态菜单
+  if (to.path === '/') {
+    return true
+  }
   if (getToken()) {
     to.meta.title && useSettingsStore().setTitle(to.meta.title)
     const isLock = useLockStore().isLock
     if (to.path === '/login') {
       NProgress.done()
-      return { path: '/' }
+      return { path: '/index' }
     }
     if (isWhiteList(to.path)) {
       return true
@@ -36,7 +40,7 @@ router.beforeEach(async (to, from) => {
     }
     if (!isLock && to.path === '/lock') {
       NProgress.done()
-      return { path: '/' }
+      return { path: '/index' }
     }
     if (useUserStore().roles.length === 0) {
       isRelogin.show = true
@@ -56,7 +60,7 @@ router.beforeEach(async (to, from) => {
       } catch (err) {
         await useUserStore().logOut()
         ElMessage.error(err)
-        return { path: '/' }
+        return { path: '/index' }
       }
     }
     return true

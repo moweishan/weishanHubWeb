@@ -27,6 +27,12 @@ import Layout from '@/layout'
 // 公共路由
 export const constantRoutes = [
   {
+    // 公开门面：独立单页，不进入后台 Layout，也不加载任何业务数据
+    path: '/',
+    component: () => import('@/views/landing/index.vue'),
+    hidden: true
+  },
+  {
     path: '/redirect',
     component: Layout,
     hidden: true,
@@ -58,12 +64,12 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '',
+    // 后台首页：保留 Index 路由名与 affix 标签；path 不再使用空路径，避免与公开首页 '/' 冲突
+    path: '/index',
     component: Layout,
-    redirect: '/index',
     children: [
       {
-        path: '/index',
+        path: '',
         component: () => import('@/views/index'),
         name: 'Index',
         meta: { title: '首页', icon: 'dashboard', affix: true }

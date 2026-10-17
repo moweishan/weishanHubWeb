@@ -8,6 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="icon" href="/favicon.ico">
   <title>%VITE_APP_TITLE%</title>
+  <!-- three.js 浏览器运行时：固定版本 CDN，必须在任何模块脚本之前声明。
+       OrbitControls 内部的裸导入 'three' 会复用同一份 CDN 模块实例。 -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js"
+      }
+    }
+  </script>
   <!--[if lt IE 11]><script>window.location.href='/html/ie.html';</script><![endif]-->
   <style>
     html,

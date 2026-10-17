@@ -41,7 +41,7 @@ export default {
         if (latestView) {
           return router.push(latestView.fullPath)
         }
-        return router.push('/')
+        return router.push('/index')
       })
     }
     return useTagsViewStore().delView(obj)

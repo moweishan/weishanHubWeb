@@ -65,6 +65,12 @@ const topMenus = computed(() => {
       // 兼容顶部栏一级菜单内部跳转
       if (menu.path === '/' && menu.children) {
           topMenus.push(menu.children[0])
+      } else if (!menu.meta && menu.children && menu.children.length > 0) {
+          // 兼容无 meta 的一级容器（如首页父路由 /index）：展开首个可见子菜单，
+          // 空子路径补全为父级绝对路径，保证首页标题图标与点击跳转正确
+          const child = menu.children[0]
+          const childPath = child.path ? (child.path.startsWith('/') ? child.path : menu.path + '/' + child.path) : menu.path
+          topMenus.push({ ...child, path: childPath })
       } else {
           topMenus.push(menu)
       }
@@ -81,6 +87,9 @@ const childrenMenus = computed(() => {
       if (router.children[item].parentPath === undefined) {
         if(router.path === "/") {
           router.children[item].path = "/" + router.children[item].path
+        } else if(!router.children[item].path) {
+          // 兼容首页新结构：空子路径直接沿用父级路径，避免拼出 /index/ 这类多余斜杠
+          router.children[item].path = router.path
         } else {
           if(!isHttp(router.children[item].path)) {
             router.children[item].path = router.path + "/" + router.children[item].path
@@ -123,7 +132,7 @@ function handleSelect(key, keyPath) {
   if (isHttp(key)) {
     // http(s):// 路径新窗口打开
     window.open(key, "_blank")
-  } else if (!route || !route.children) {
+  } else if (!route || !route.children || (key === '/index' && route.children.some(item => item.name === 'Index'))) {
     // 没有子路由路径内部打开
     const routeMenu = childrenMenus.value.find(item => item.path === key)
     if (routeMenu && routeMenu.query) {

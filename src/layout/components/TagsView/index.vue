@@ -347,7 +347,7 @@ function toLastView(visitedViews, view) {
     if (view && view.name === 'Dashboard') {
       router.replace({ path: '/redirect' + view.fullPath })
     } else {
-      router.push('/')
+      router.push('/index')
     }
   }
 }
