@@ -10,7 +10,7 @@ weishanHub 的管理前端，基于 RuoYi-Vue3 3.9.2，采用 Vue 3、Vite、Ele
 
 ## 前端运行
 
-使用 Node.js 20.19+（20.x）或 22+、npm 10+，以下操作均在本仓库根目录执行。
+使用 Node.js 22.13+（推荐 24 LTS）、npm 10+，以下操作均在本仓库根目录执行。
 
 ```powershell
 # 克隆项目

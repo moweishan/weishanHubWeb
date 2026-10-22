@@ -46,6 +46,10 @@ export default defineConfig(({ mode, command }) => {
       strictPort: true,
       host: true,
       open: false,
+      // 编辑器/工具写文件时会生成临时目录，Windows 上被占用会导致 FSWatcher 报 EBUSY 并让 dev 服务退出
+      watch: {
+        ignored: ['**/*.tmpdir/**', '**/*.tmp', '**/.git/**']
+      },
       proxy: {
         // https://cn.vitejs.dev/config/#server-proxy
         [env.VITE_APP_BASE_API || '/dev-api']: {

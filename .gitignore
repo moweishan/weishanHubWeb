@@ -30,6 +30,11 @@ target/
 coverage/
 logs/
 data/
+# 工具箱源码目录允许追踪；data/ 仍保留给运行数据
+!src/data/
+src/data/*
+!src/data/toolbox/
+!src/data/toolbox/**
 *.log
 *.pid
 **/.env.local
@@ -55,3 +60,6 @@ Thumbs.db
 # 其他本地秘密文件
 .env
 *.keystore
+
+# 工具箱 PDF.js 运行时资产（由 scripts/copy-toolbox-pdf-assets.mjs 生成）
+public/toolbox-generated/
