@@ -54,6 +54,14 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    // 通知详情独立隐藏路由：不进入后台 Layout，不在侧边栏展示；是否可看由后端逐次判定
+    path: '/notification/detail/:token',
+    component: () => import('@/views/notification/detail/index.vue'),
+    hidden: true,
+    name: 'NotificationPublicDetail',
+    meta: { title: '通知详情' }
+  },
+  {
     path: "/:pathMatch(.*)*",
     component: () => import('@/views/error/404'),
     hidden: true

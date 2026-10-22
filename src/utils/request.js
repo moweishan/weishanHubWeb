@@ -76,6 +76,8 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(res => {
     // 未设置状态码则默认成功状态
     const code = res.data.code || 200
+    // 公共详情等页面自行处理业务错误，只对显式声明 skipAuthHandler 的请求生效
+    const skipAuthHandler = res.config && res.config.skipAuthHandler === true
     // 获取错误信息
     const msg = errorCode[code] || res.data.msg || errorCode['default']
     // 二进制数据则直接返回
@@ -83,6 +85,10 @@ service.interceptors.response.use(res => {
       return res.data
     }
     if (code === 401) {
+      // 公共详情等接口可选择跳过全局登录弹窗，由页面自行展示登录提示；其余行为保持不变
+      if (skipAuthHandler) {
+        return Promise.reject(res.data)
+      }
       if (!isRelogin.show) {
         isRelogin.show = true
         ElMessageBox.confirm('登录状态已过期，您可以继续留在该页面，或者重新登录', '系统提示', { confirmButtonText: '重新登录', cancelButtonText: '取消', type: 'warning' }).then(() => {
@@ -96,12 +102,21 @@ service.interceptors.response.use(res => {
     }
       return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
     } else if (code === 500) {
+      if (skipAuthHandler) {
+        return Promise.reject(res.data)
+      }
       ElMessage({ message: msg, type: 'error' })
       return Promise.reject(new Error(msg))
     } else if (code === 601) {
+      if (skipAuthHandler) {
+        return Promise.reject(res.data)
+      }
       ElMessage({ message: msg, type: 'warning' })
       return Promise.reject(new Error(msg))
     } else if (code !== 200) {
+      if (skipAuthHandler) {
+        return Promise.reject(res.data)
+      }
       ElNotification.error({ title: msg })
       return Promise.reject('error')
     } else {

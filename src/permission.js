@@ -14,12 +14,19 @@ NProgress.configure({ showSpinner: false })
 
 const whiteList = ['/login', '/register']
 
+// 通知公共详情：精确放行单个隐藏路由，由服务端逐次判断 UA/时间/票据/权限；
+// 即使已登录也不在这里拉取用户信息或动态菜单，避免把公开页拖进后台初始化流程。
+const publicNotificationDetailPattern = /^\/notification\/detail\/[A-Za-z0-9_-]+$/
+
 const isWhiteList = (path) => {
   return whiteList.some(pattern => isPathMatch(pattern, path))
 }
 
 router.beforeEach(async (to, from) => {
   NProgress.start()
+  if (publicNotificationDetailPattern.test(to.path)) {
+    return true
+  }
   // 公开门面：无论是否持有 token 都直接放行，不拉取用户信息与动态菜单
   if (to.path === '/') {
     return true
