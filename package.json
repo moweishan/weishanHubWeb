@@ -13,7 +13,8 @@
     "prebuild:stage": "node scripts/copy-toolbox-pdf-assets.mjs",
     "build:stage": "vite build --mode staging",
     "preview": "vite preview",
-    "test:notification": "node --test tests/notification/*.test.js"
+    "test:notification": "node --test tests/notification/*.test.js",
+    "test:home": "node --test tests/home/*.test.js"
   },
   "repository": {
     "type": "git",

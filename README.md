@@ -8,6 +8,8 @@ weishanHub 的管理前端，基于 RuoYi-Vue3 3.9.2，采用 Vue 3、Vite、Ele
 
 配套后端：[weishanHubServer](https://github.com/moweishan/weishanHubServer)。开发规范见 [AGENTS.md](AGENTS.md)。
 
+后台首页 `/index` 为个人工作台（天气、快捷入口、今日通知），公开首页 `/` 保持不变；接口、迁移和高德 Key 配置见后端 [home-workbench.md](https://github.com/moweishan/weishanHubServer/blob/master/docs/home-workbench.md)。
+
 ## 前端运行
 
 使用 Node.js 22.13+（推荐 24 LTS）、npm 10+，以下操作均在本仓库根目录执行。
