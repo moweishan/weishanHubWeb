@@ -14,3 +14,11 @@ export function getNotificationDetail(token) {
     skipAuthHandler: true
   })
 }
+
+export function getNotificationQuestion(token) {
+  return request({ url: '/notification/detail/' + encodeURIComponent(token) + '/question', method: 'get', skipAuthHandler: true })
+}
+
+export function submitNotificationAnswer(token, data) {
+  return request({ url: '/notification/detail/' + encodeURIComponent(token) + '/answer', method: 'post', data, skipAuthHandler: true })
+}

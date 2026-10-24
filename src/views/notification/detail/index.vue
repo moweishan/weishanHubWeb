@@ -80,6 +80,8 @@
         <div v-if="record.messageType === 'CARD'" class="notification-markdown" v-html="safeHtml"></div>
         <pre v-else class="notification-text">{{ plainContent }}</pre>
 
+        <NotificationQuestionForm :token="String(route.params.token || '')" @access-error="load" />
+
         <footer class="notification-footer">
           微信 / 企业微信内可在免登录截止前直接查看；普通浏览器需登录后由具备通知记录查询权限的账号查看。链接到期、撤销或删除后立即失效。
         </footer>
@@ -102,6 +104,7 @@ import {
 import { renderNotificationMarkdown } from '@/utils/notification/markdown'
 import { removeToken } from '@/utils/auth'
 import useUserStore from '@/store/modules/user'
+import NotificationQuestionForm from '@/components/NotificationQuestionForm/index.vue'
 
 defineOptions({ name: 'NotificationPublicDetail' })
 

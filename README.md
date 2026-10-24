@@ -12,6 +12,8 @@ weishanHub 的管理前端，基于 RuoYi-Vue3 3.9.2，采用 Vue 3、Vite、Ele
 
 ## 前端运行
 
+通知详情页支持问题选择与提交，查看和提交均沿用微信内一小时免登录及后台查询权限规则；配套后端需执行 `20261024_add_notification_question.sql`。浏览器合成验收：本地启动 Vite 后运行 `node tests/notification/question-form.browser.mjs`。
+
 使用 Node.js 22.13+（推荐 24 LTS）、npm 10+，以下操作均在本仓库根目录执行。
 
 ```powershell
